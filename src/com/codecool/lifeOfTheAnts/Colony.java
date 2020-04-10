@@ -19,16 +19,15 @@ public class Colony {
 
     public void setAntColony(){
         antColony.add(new Queen());
-        antColony.add(new Soldier());
-        antColony.add(new Soldier());
-        antColony.add(new Soldier());
-        antColony.add(new Drone());
-        antColony.add(new Drone());
-        antColony.add(new Worker());
-        antColony.add(new Worker());
-        antColony.add(new Worker());
-        antColony.add(new Worker());
-        antColony.add(new Worker());
+        for (int i = 0; i < Main.getSolderNumber(); i++){
+            antColony.add(new Soldier());
+        }
+        for (int i = 0; i < Main.getDroneNumber(); i++){
+            antColony.add(new Drone());
+        }
+        for (int i = 0; i < Main.getWorkerNumber(); i++){
+            antColony.add(new Worker());
+        }
     }
 
     public void stepTime(){

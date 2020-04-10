@@ -3,8 +3,18 @@ package com.codecool.lifeOfTheAnts;
 import com.codecool.lifeOfTheAnts.Bugs.Ant;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Main {
+    private static int xSize = 25;
+    private static int ySize = 25;
+    private static int solderNumber = 4;
+    private static int workerNumber = 4;
+    private static int droneNumber = 3;
+    private static String[][] matrix = new String[xSize][ySize];
+    private static Colony colony = new Colony();
+    private static int timeStep = 1;
+
     public static int getxSize() {
         return xSize;
     }
@@ -13,11 +23,17 @@ public class Main {
         return ySize;
     }
 
-    private static int xSize = 25;
-    private static int ySize = 25;
-    private static char[][] matrix = new char[xSize][ySize];
-    private static Colony colony = new Colony();
-    private static int timeStep = 100;
+    public static int getSolderNumber() {
+        return solderNumber;
+    }
+
+    public static int getWorkerNumber() {
+        return workerNumber;
+    }
+
+    public static int getDroneNumber() {
+        return droneNumber;
+    }
 
     public static void main(String[] args) throws InterruptedException {
         colony.setAntColony();
@@ -26,32 +42,32 @@ public class Main {
             matrixRefresh();
             printMatrix(matrix);
             timeStep--;
-            Thread.sleep(5000);
+            Thread.sleep(50);
             System.out.print("\033\143");
-            matrix = new char[xSize][ySize];
+            matrix = new String[xSize][ySize];
         }
 
 
     }
 
     public static void matrixRefresh(){
-        char antChar;
+        String antChar;
         if (colony.getWasp().isLive()){
-            matrix[colony.getWasp().getX()][colony.getWasp().getY()] = 'W';
+            matrix[colony.getWasp().getX()][colony.getWasp().getY()] = "W";
         }
         for (Ant ant: colony.getAntColony()){
             switch (ant.getType()){
                 case "Queen":
-                    antChar = 'Q';
+                    antChar = "Q";
                     break;
                 case "Soldier":
-                    antChar = 'S';
+                    antChar = "S";
                     break;
                 case "Worker":
-                    antChar = 'a';
+                    antChar = "a";
                     break;
                 case "Drone":
-                    antChar = 'D';
+                    antChar = "D";
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + ant.getType());
@@ -60,9 +76,12 @@ public class Main {
         }
     }
 
-    public static void printMatrix(char[][] matrix){
-        for (char[] line: matrix){
-            System.out.println(Arrays.toString(line));
+    public static void printMatrix(String[][] matrix){
+        for (String[] line: matrix){
+            for (String cell: line){
+                System.out.print(Objects.requireNonNullElse(cell, "."));
+            }
+            System.out.print("\n");
         }
     }
 }
