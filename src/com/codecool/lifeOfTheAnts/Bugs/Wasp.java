@@ -16,7 +16,15 @@ public class Wasp extends Bug{
 
     public void waspWokenUp(){
         live = true;
-        setX(RandomGenerate.randomGenerate(Main.getxSize(), 0));
-        setY(RandomGenerate.randomGenerate(Main.getySize(), 0));
+        setX(Main.getxOrigo());
+        setY(Main.getyOrigo());
+        setCubeX();
+        setCubeY();
+        while (isCubeX() && isCubeY()){
+            setX(RandomGenerate.randomGenerate(Main.getxSize(), 0));
+            setY(RandomGenerate.randomGenerate(Main.getySize(), 0));
+            setCubeX();
+            setCubeY();
+        }
     }
 }

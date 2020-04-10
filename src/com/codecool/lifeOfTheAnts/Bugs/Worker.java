@@ -5,8 +5,16 @@ import com.codecool.lifeOfTheAnts.RandomGenerate;
 
 public class Worker extends Ant {
     {
-        setX(RandomGenerate.randomGenerate(Main.getxSize() - 10, 10));
-        setY(RandomGenerate.randomGenerate(Main.getySize() - 10, 10));
+        setX(Main.getxOrigo());
+        setY(Main.getyOrigo());
+        setCubeX();
+        setCubeY();
+        while (isCubeX() && isCubeY()){
+            setX(RandomGenerate.randomGenerate(Main.getxSize() - 5, 5));
+            setY(RandomGenerate.randomGenerate(Main.getySize() - 5, 5));
+            setCubeX();
+            setCubeY();
+        }
         setType("Worker");
         setDistanceFromQueen();
     }

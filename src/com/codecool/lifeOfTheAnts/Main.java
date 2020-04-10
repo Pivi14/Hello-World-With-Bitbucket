@@ -8,6 +8,8 @@ import java.util.Objects;
 public class Main {
     private static int xSize = 25;
     private static int ySize = 25;
+    private static int xOrigo = xSize / 2;
+    private static int yOrigo = ySize / 2;
     private static int solderNumber = 4;
     private static int workerNumber = 4;
     private static int droneNumber = 3;
@@ -15,10 +17,11 @@ public class Main {
     private static Colony colony = new Colony();
     private static int timeStep = 1;
 
+    public static int getxOrigo() { return xOrigo; }
+    public static int getyOrigo() { return yOrigo; }
     public static int getxSize() {
         return xSize;
     }
-
     public static int getySize() {
         return ySize;
     }

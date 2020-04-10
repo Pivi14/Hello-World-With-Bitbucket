@@ -7,8 +7,16 @@ import com.codecool.lifeOfTheAnts.RandomGenerate;
 public class Drone extends Ant {
     private int moodCounter;
     {
-        setX(RandomGenerate.randomGenerate(Main.getxSize(), 0));
-        setY(RandomGenerate.randomGenerate(Main.getySize(), 0));
+        setX(Main.getxOrigo());
+        setY(Main.getyOrigo());
+        setCubeX();
+        setCubeY();
+        while (isCubeX() && isCubeY()){
+            setX(RandomGenerate.randomGenerate(Main.getxSize(), 0));
+            setY(RandomGenerate.randomGenerate(Main.getySize(), 0));
+            setCubeX();
+            setCubeY();
+        }
         setType("Drone");
         setDistanceFromQueen();
     }
