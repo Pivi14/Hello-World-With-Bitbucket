@@ -5,6 +5,7 @@ import com.codecool.lifeOfTheAnts.RandomGenerate;
 
 public class Worker extends Ant {
     {
+        setLifeTime(RandomGenerate.randomGenerate(200, 100));
         setX(Main.getxOrigo());
         setY(Main.getyOrigo());
         setCubeX();

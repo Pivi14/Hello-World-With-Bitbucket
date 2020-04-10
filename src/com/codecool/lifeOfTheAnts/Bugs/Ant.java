@@ -5,7 +5,16 @@ import com.codecool.lifeOfTheAnts.Main;
 import com.codecool.lifeOfTheAnts.RandomGenerate;
 
 public abstract class Ant extends Bug {
+    private int lifeTime;
     private int distanceFromQueen;
+
+    public int getLifeTime() {
+        return lifeTime;
+    }
+
+    public void setLifeTime(int lifeTime) {
+        this.lifeTime = lifeTime;
+    }
 
     public int getDistanceFromQueen() {
         return distanceFromQueen;
@@ -24,6 +33,7 @@ public abstract class Ant extends Bug {
             move();
         }
         setDistanceFromQueen();
+        lifeTime--;
     }
 
     public int distanceCounter(int targetX, int targetY, int X, int Y) {

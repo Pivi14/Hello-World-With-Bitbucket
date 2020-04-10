@@ -11,6 +11,7 @@ public class Soldier extends Ant {
     private ArrayList<String> patrol = new ArrayList<>(Arrays.asList("North", "East", "South", "West"));
 
     {
+        setLifeTime(RandomGenerate.randomGenerate(200, 100));
         setX(Main.getxOrigo());
         setY(Main.getyOrigo());
         setCubeX();
@@ -67,6 +68,7 @@ public class Soldier extends Ant {
             move();
         }
         setDistanceFromQueen();
+        setLifeTime(getLifeTime() - 1);
     }
 
 

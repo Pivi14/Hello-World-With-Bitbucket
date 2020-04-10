@@ -41,14 +41,18 @@ public class Main {
     }
 
     public static void main(String[] args) throws InterruptedException {
+        Scanner scanner = new Scanner(System.in);
         colony.setAntColony();
+        matrixRefresh();
+        printMatrix(matrix);
+        matrix = new String[xSize][ySize];
+        scanner.nextLine();
         while (timeStep > 0){
             colony.stepTime();
             matrixRefresh();
             printMatrix(matrix);
             timeStep--;
 //            Thread.sleep(500);
-            Scanner scanner = new Scanner(System.in);
             scanner.nextLine();
             System.out.print("\033\143");
             matrix = new String[xSize][ySize];

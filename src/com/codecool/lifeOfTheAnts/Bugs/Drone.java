@@ -7,6 +7,7 @@ import com.codecool.lifeOfTheAnts.RandomGenerate;
 public class Drone extends Ant {
     private int moodCounter;
     {
+        setLifeTime(RandomGenerate.randomGenerate(200, 100));
         setX(Main.getxOrigo());
         setY(Main.getyOrigo());
         setCubeX();
@@ -37,8 +38,9 @@ public class Drone extends Ant {
             } else if (moodCounter > 0){
                 moodCounter--;
                 if (moodCounter == 0){
+                    queen.setEegHatch(3);
                     queen.setMood(false);
-                    queen.setMoodCounter(RandomGenerate.randomGenerate(200, 100));
+                    queen.setMoodCounter(RandomGenerate.randomGenerate(5, 1));
                 }
             } else if (getDistanceFromQueen() > 3){
                 move();
@@ -49,6 +51,7 @@ public class Drone extends Ant {
             }
         }
         setDistanceFromQueen();
+        setLifeTime(getLifeTime() - 1);
     }
 
     public void dropToCorner(){

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Colony {
     private Wasp wasp = new Wasp();
     private ArrayList<Ant> antColony = new ArrayList<>();
+    private ArrayList<Ant> deathAnt = new ArrayList<>();
 
 
     public Wasp getWasp() {
@@ -32,16 +33,21 @@ public class Colony {
 
     public void stepTime(){
         ArrayList<Coordinate> steps = new ArrayList<>();
-        for (Ant ant: antColony){
-            int beforeStepX = ant.getX();
-            int beforeStepY = ant.getY();
-            ant.action(this);
-            while (stepChecker(steps, ant.getX(), ant.getY())){
-                ant.setX(beforeStepX);
-                ant.setY(beforeStepY);
+        for (int i = 0; i < antColony.size(); i++){
+            int beforeStepX = antColony.get(i).getX();
+            int beforeStepY = antColony.get(i).getY();
+            antColony.get(i).action(this);
+            while (stepChecker(steps, antColony.get(i).getX(), antColony.get(i).getY())){
+                antColony.get(i).setX(beforeStepX);
+                antColony.get(i).setY(beforeStepY);
             }
-            steps.add(new Coordinate(ant.getX(), ant.getY()));
+            if (antColony.get(i).getLifeTime() > 0){
+                steps.add(new Coordinate(antColony.get(i).getX(), antColony.get(i).getY()));
+            } else {
+                deathAnt.add(antColony.get(i));
+            }
         }
+        removeDeathAnts(antColony);
         if (RandomGenerate.randomGenerate(100, 0) <= 5 && !wasp.isLive()){
             wasp.waspWokenUp();
         }
@@ -55,4 +61,14 @@ public class Colony {
         }
         return false;
     }
+
+    public void removeDeathAnts(ArrayList<Ant> antColony){
+        if (antColony.size() != 0){
+            for (Ant ant: deathAnt){
+                antColony.remove(ant);
+            }
+            deathAnt = new ArrayList<>();
+        }
+    }
+
 }
