@@ -29,16 +29,24 @@ public class Soldier extends Ant {
     public void move() {
         switch (patrol.get(0)){
             case "North":
-                setX(getX() - 1);
+                if (getX() > 0){
+                    setX(getX() - 1);
+                }
                 break;
             case "East":
-                setY(getY() + 1);
+                if (getY() < Main.getySize() - 1){
+                    setY(getY() + 1);
+                }
                 break;
             case "South":
-                setX(getX() + 1);
+                if (getX() < Main.getxSize() - 1){
+                    setX(getX() + 1);
+                }
                 break;
             case "West":
-                setY(getY() - 1);
+                if (getY() > 0){
+                    setY(getY() - 1);
+                }
                 break;
         }
         setDistanceFromQueen();
