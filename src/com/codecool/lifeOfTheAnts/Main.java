@@ -4,6 +4,7 @@ import com.codecool.lifeOfTheAnts.Bugs.Ant;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class Main {
     private static int xSize = 25;
@@ -15,13 +16,14 @@ public class Main {
     private static int droneNumber = 3;
     private static String[][] matrix = new String[xSize][ySize];
     private static Colony colony = new Colony();
-    private static int timeStep = 1;
+    private static int timeStep = 1000;
 
     public static int getxOrigo() { return xOrigo; }
     public static int getyOrigo() { return yOrigo; }
     public static int getxSize() {
         return xSize;
     }
+
     public static int getySize() {
         return ySize;
     }
@@ -45,7 +47,9 @@ public class Main {
             matrixRefresh();
             printMatrix(matrix);
             timeStep--;
-            Thread.sleep(50);
+//            Thread.sleep(500);
+            Scanner scanner = new Scanner(System.in);
+            scanner.nextLine();
             System.out.print("\033\143");
             matrix = new String[xSize][ySize];
         }

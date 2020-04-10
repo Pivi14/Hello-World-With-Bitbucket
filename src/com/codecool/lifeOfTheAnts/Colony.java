@@ -31,11 +31,28 @@ public class Colony {
     }
 
     public void stepTime(){
-        if (RandomGenerate.randomGenerate(100, 0) <= 5){
+        ArrayList<Coordinate> steps = new ArrayList<>();
+        for (Ant ant: antColony){
+            int beforeStepX = ant.getX();
+            int beforeStepY = ant.getY();
+            ant.action(this);
+            while (stepChecker(steps, ant.getX(), ant.getY())){
+                ant.setX(beforeStepX);
+                ant.setY(beforeStepY);
+            }
+            steps.add(new Coordinate(ant.getX(), ant.getY()));
+        }
+        if (RandomGenerate.randomGenerate(100, 0) <= 5 && !wasp.isLive()){
             wasp.waspWokenUp();
         }
-        for (Ant ant: antColony){
-            ant.action(this);
+    }
+
+    public boolean stepChecker(ArrayList<Coordinate> steps, int x, int y){
+        for (Coordinate coordinate: steps){
+            if (coordinate.getxCoordinate() == x && coordinate.getyCoordinate() == y){
+                return true;
+            }
         }
+        return false;
     }
 }
