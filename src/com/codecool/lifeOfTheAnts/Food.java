@@ -7,7 +7,7 @@ public class Food extends Bug {
     private boolean spawn;
 
     public boolean isCarrying() {
-        return carrying;
+        return !carrying;
     }
 
     public void setCarrying(boolean carrying) {
@@ -24,15 +24,6 @@ public class Food extends Bug {
 
     public void spawnFood(){
         spawn = true;
-        setX(Main.getxOrigo());
-        setY(Main.getyOrigo());
-        setCubeX();
-        setCubeY();
-        while (isCubeX() && isCubeY()){
-            setX(RandomGenerate.randomGenerate(Main.getxSize(), 0));
-            setY(RandomGenerate.randomGenerate(Main.getySize(), 0));
-            setCubeX();
-            setCubeY();
-        }
+        spawn();
     }
 }

@@ -32,7 +32,7 @@ public class Drone extends Ant {
         Queen queen = (Queen) colony.getAntColony().get(0);
         if (!colony.getWasp().isLive()){
             if (getDistanceFromQueen() <= 3 && queen.getMoodCounter() <= 0 && !queen.isMood()){
-                moodCounter = 10;
+                moodCounter = 3;
                 queen.setMood(true);
                 System.out.println("HALLELUJAH");
             } else if (moodCounter > 0){

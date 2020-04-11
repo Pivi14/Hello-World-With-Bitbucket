@@ -71,7 +71,7 @@ public class Colony {
     }
 
     public void newAntBorn(){
-        int eggNumber = RandomGenerate.randomGenerate(11, 3);
+        int eggNumber = RandomGenerate.randomGenerate(15, 7);
         for (int i = 0; i < eggNumber; i++){
             int antHatch = RandomGenerate.randomGenerate(100, 0);
             if (antHatch < 40){

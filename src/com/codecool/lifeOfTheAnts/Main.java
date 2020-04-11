@@ -2,13 +2,12 @@ package com.codecool.lifeOfTheAnts;
 
 import com.codecool.lifeOfTheAnts.Bugs.Ant;
 
-import java.util.Arrays;
 import java.util.Objects;
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class Main {
-    private static int xSize = 31;
-    private static int ySize = 31;
+    private static int xSize = 25;
+    private static int ySize = 25;
     private static int xOrigo = xSize / 2;
     private static int yOrigo = ySize / 2;
     private static int solderNumber = 5;
@@ -16,7 +15,7 @@ public class Main {
     private static int droneNumber = 4;
     private static String[][] matrix = new String[xSize][ySize];
     private static Colony colony = new Colony();
-    private static int timeStep = 1000;
+    private static int timeStep = 5000;
 
     public static int getxOrigo() { return xOrigo; }
     public static int getyOrigo() { return yOrigo; }
@@ -67,7 +66,7 @@ public class Main {
         if (colony.getWasp().isLive()){
             matrix[colony.getWasp().getX()][colony.getWasp().getY()] = "W";
         }
-        if (colony.getFood().isSpawn() && !colony.getFood().isCarrying()){
+        if (colony.getFood().isSpawn() && colony.getFood().isCarrying()){
             matrix[colony.getFood().getX()][colony.getFood().getY()] = "F";
         }
         for (Ant ant: colony.getAntColony()){

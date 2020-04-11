@@ -1,6 +1,7 @@
 package com.codecool.lifeOfTheAnts.Bugs;
 
 import com.codecool.lifeOfTheAnts.Main;
+import com.codecool.lifeOfTheAnts.RandomGenerate;
 
 public abstract class Bug {
     private String type;
@@ -49,4 +50,16 @@ public abstract class Bug {
     public void setY(int y) {
         this.y = y;
     }
+
+    public void spawn(){
+        setX(Main.getxOrigo());
+        setY(Main.getyOrigo());
+        setCubeX();
+        setCubeY();
+        while (isCubeX() && isCubeY() || getX() == Main.getxOrigo() || getY() == Main.getyOrigo()){
+            setX(RandomGenerate.randomGenerate(Main.getxSize(), 0));
+            setY(RandomGenerate.randomGenerate(Main.getySize(), 0));
+            setCubeX();
+            setCubeY();
+        }}
 }

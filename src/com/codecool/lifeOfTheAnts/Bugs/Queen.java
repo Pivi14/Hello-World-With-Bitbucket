@@ -2,7 +2,6 @@ package com.codecool.lifeOfTheAnts.Bugs;
 
 import com.codecool.lifeOfTheAnts.Colony;
 import com.codecool.lifeOfTheAnts.Main;
-import com.codecool.lifeOfTheAnts.RandomGenerate;
 
 public class Queen extends Ant implements Move {
     private boolean eggHatching;

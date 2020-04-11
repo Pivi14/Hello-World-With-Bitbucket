@@ -41,23 +41,18 @@ public abstract class Ant extends Bug {
     }
 
     public void moveToward(int targetX, int targetY) {
-        int distanceFromTarget = distanceCounter(targetX, targetY, getX(), getY());
-        int newDistanceFromTarget = distanceFromTarget;
-        while (distanceFromTarget == newDistanceFromTarget) {
-            if (RandomGenerate.randomGenerate(2, 0) == 1) {
-                if (getX() > targetX) {
-                    setX(getX() - 1);
-                } else if (getX() < targetX) {
-                    setX(getX() + 1);
-                }
-            } else {
-                if (getY() > targetY) {
-                    setY(getY() - 1);
-                } else if (getY() < targetY) {
-                    setY(getY() + 1);
-                }
+        if (RandomGenerate.randomGenerate(2, 0) == 1) {
+            if (getX() > targetX) {
+                setX(getX() - 1);
+            } else if (getX() < targetX) {
+                setX(getX() + 1);
             }
-            newDistanceFromTarget = distanceCounter(targetX, targetY, getX(), getY());
+        } else {
+            if (getY() > targetY) {
+                setY(getY() - 1);
+            } else if (getY() < targetY) {
+                setY(getY() + 1);
+            }
         }
     }
 }
