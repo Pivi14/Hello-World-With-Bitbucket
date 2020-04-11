@@ -5,10 +5,13 @@ import com.codecool.lifeOfTheAnts.Bugs.*;
 import java.util.ArrayList;
 
 public class Colony {
+    private Food food = new Food();
     private Wasp wasp = new Wasp();
     private ArrayList<Ant> antColony = new ArrayList<>();
     private ArrayList<Ant> deathAnt = new ArrayList<>();
 
+
+    public Food getFood() { return food; }
 
     public Wasp getWasp() {
         return wasp;
@@ -33,23 +36,26 @@ public class Colony {
 
     public void stepTime(){
         ArrayList<Coordinate> steps = new ArrayList<>();
-        for (int i = 0; i < antColony.size(); i++){
-            int beforeStepX = antColony.get(i).getX();
-            int beforeStepY = antColony.get(i).getY();
-            antColony.get(i).action(this);
-            while (stepChecker(steps, antColony.get(i).getX(), antColony.get(i).getY())){
-                antColony.get(i).setX(beforeStepX);
-                antColony.get(i).setY(beforeStepY);
+        for (Ant ant : antColony) {
+            int beforeStepX = ant.getX();
+            int beforeStepY = ant.getY();
+            ant.action(this);
+            while (stepChecker(steps, ant.getX(), ant.getY())) {
+                ant.setX(beforeStepX);
+                ant.setY(beforeStepY);
             }
-            if (antColony.get(i).getLifeTime() > 0){
-                steps.add(new Coordinate(antColony.get(i).getX(), antColony.get(i).getY()));
+            if (ant.getLifeTime() > 0) {
+                steps.add(new Coordinate(ant.getX(), ant.getY()));
             } else {
-                deathAnt.add(antColony.get(i));
+                deathAnt.add(ant);
             }
         }
         removeDeathAnts(antColony);
         if (RandomGenerate.randomGenerate(100, 0) <= 5 && !wasp.isLive()){
             wasp.waspWokenUp();
+        }
+        if (RandomGenerate.randomGenerate(100, 0) <= 10 && !food.isSpawn()){
+            food.spawnFood();
         }
     }
 

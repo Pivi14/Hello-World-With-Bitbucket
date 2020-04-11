@@ -11,9 +11,9 @@ public class Main {
     private static int ySize = 25;
     private static int xOrigo = xSize / 2;
     private static int yOrigo = ySize / 2;
-    private static int solderNumber = 4;
-    private static int workerNumber = 4;
-    private static int droneNumber = 3;
+    private static int solderNumber = 3;
+    private static int workerNumber = 3;
+    private static int droneNumber = 2;
     private static String[][] matrix = new String[xSize][ySize];
     private static Colony colony = new Colony();
     private static int timeStep = 1000;
@@ -65,6 +65,9 @@ public class Main {
         String antChar;
         if (colony.getWasp().isLive()){
             matrix[colony.getWasp().getX()][colony.getWasp().getY()] = "W";
+        }
+        if (colony.getFood().isSpawn() && !colony.getFood().isCarrying()){
+            matrix[colony.getFood().getX()][colony.getFood().getY()] = "F";
         }
         for (Ant ant: colony.getAntColony()){
             switch (ant.getType()){
