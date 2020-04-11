@@ -35,46 +35,52 @@ public class Colony {
     }
 
     public void stepTime(){
-        ArrayList<Coordinate> steps = new ArrayList<>();
         for (Ant ant : antColony) {
-            int beforeStepX = ant.getX();
-            int beforeStepY = ant.getY();
             ant.action(this);
-            while (stepChecker(steps, ant.getX(), ant.getY())) {
-                ant.setX(beforeStepX);
-                ant.setY(beforeStepY);
-            }
-            if (ant.getLifeTime() > 0) {
-                steps.add(new Coordinate(ant.getX(), ant.getY()));
-            } else {
+            if (ant.getLifeTime() == 0) {
                 deathAnt.add(ant);
             }
         }
-        removeDeathAnts(antColony);
-        if (RandomGenerate.randomGenerate(100, 0) <= 5 && !wasp.isLive()){
+        removeDeathAnts();
+        if (RandomGenerate.randomGenerate(100, 0) <= 1 && !wasp.isLive()){
             wasp.waspWokenUp();
         }
         if (RandomGenerate.randomGenerate(100, 0) <= 10 && !food.isSpawn()){
             food.spawnFood();
         }
-    }
-
-    public boolean stepChecker(ArrayList<Coordinate> steps, int x, int y){
-        for (Coordinate coordinate: steps){
-            if (coordinate.getxCoordinate() == x && coordinate.getyCoordinate() == y){
-                return true;
-            }
+        if (((Queen) antColony.get(0)).isEggHatching()){
+            newAntBorn();
+            ((Queen) antColony.get(0)).setEggHatching(false);
         }
-        return false;
     }
 
-    public void removeDeathAnts(ArrayList<Ant> antColony){
-        if (antColony.size() != 0){
-            for (Ant ant: deathAnt){
-                antColony.remove(ant);
-            }
+//    public boolean stepChecker(ArrayList<Coordinate> steps, int x, int y){
+//        for (Coordinate coordinate: steps){
+//            if (coordinate.getxCoordinate() == x && coordinate.getyCoordinate() == y){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
+    public void removeDeathAnts(){
+        if (deathAnt.size() != 0){
+            antColony.removeAll(deathAnt);
             deathAnt = new ArrayList<>();
         }
     }
 
+    public void newAntBorn(){
+        int eggNumber = RandomGenerate.randomGenerate(11, 3);
+        for (int i = 0; i < eggNumber; i++){
+            int antHatch = RandomGenerate.randomGenerate(100, 0);
+            if (antHatch < 40){
+                antColony.add(new Soldier());
+            } else if (antHatch > 60){
+                antColony.add(new Drone());
+            } else {
+                antColony.add(new Worker());
+            }
+        }
+    }
 }

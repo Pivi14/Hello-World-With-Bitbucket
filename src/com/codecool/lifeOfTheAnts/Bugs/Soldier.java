@@ -11,7 +11,7 @@ public class Soldier extends Ant {
     private ArrayList<String> patrol = new ArrayList<>(Arrays.asList("North", "East", "South", "West"));
 
     {
-        setLifeTime(RandomGenerate.randomGenerate(200, 100));
+        setLifeTime(RandomGenerate.randomGenerate(300, 200));
         setX(Main.getxOrigo());
         setY(Main.getyOrigo());
         setCubeX();

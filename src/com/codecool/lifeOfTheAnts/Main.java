@@ -7,13 +7,13 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
-    private static int xSize = 25;
-    private static int ySize = 25;
+    private static int xSize = 31;
+    private static int ySize = 31;
     private static int xOrigo = xSize / 2;
     private static int yOrigo = ySize / 2;
-    private static int solderNumber = 3;
-    private static int workerNumber = 3;
-    private static int droneNumber = 2;
+    private static int solderNumber = 5;
+    private static int workerNumber = 2;
+    private static int droneNumber = 4;
     private static String[][] matrix = new String[xSize][ySize];
     private static Colony colony = new Colony();
     private static int timeStep = 1000;
@@ -41,21 +41,22 @@ public class Main {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Scanner scanner = new Scanner(System.in);
+//        Scanner scanner = new Scanner(System.in);
         colony.setAntColony();
         matrixRefresh();
         printMatrix(matrix);
         matrix = new String[xSize][ySize];
-        scanner.nextLine();
+//        scanner.nextLine();
         while (timeStep > 0){
             colony.stepTime();
             matrixRefresh();
             printMatrix(matrix);
             timeStep--;
-//            Thread.sleep(500);
-            scanner.nextLine();
+            Thread.sleep(5);
+//            scanner.nextLine();
             System.out.print("\033\143");
             matrix = new String[xSize][ySize];
+            System.out.println(timeStep);
         }
 
 
@@ -71,22 +72,24 @@ public class Main {
         }
         for (Ant ant: colony.getAntColony()){
             switch (ant.getType()){
-                case "Queen":
-                    antChar = "Q";
-                    break;
-                case "Soldier":
-                    antChar = "S";
-                    break;
                 case "Worker":
                     antChar = "a";
                     break;
                 case "Drone":
                     antChar = "D";
                     break;
+                case "Soldier":
+                    antChar = "S";
+                    break;
+                case "Queen":
+                    antChar = "Q";
+                    break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + ant.getType());
             }
-            matrix[ant.getX()][ant.getY()] = antChar;
+            if (matrix[ant.getX()][ant.getY()] == null){
+                matrix[ant.getX()][ant.getY()] = antChar;
+            }
         }
     }
 

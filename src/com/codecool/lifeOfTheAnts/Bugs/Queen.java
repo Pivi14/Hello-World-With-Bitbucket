@@ -5,9 +5,18 @@ import com.codecool.lifeOfTheAnts.Main;
 import com.codecool.lifeOfTheAnts.RandomGenerate;
 
 public class Queen extends Ant implements Move {
+    private boolean eggHatching;
     private int eegHatch;
     private boolean mood;
     private int moodCounter;
+
+    public boolean isEggHatching() {
+        return eggHatching;
+    }
+
+    public void setEggHatching(boolean eggHatching) {
+        this.eggHatching = eggHatching;
+    }
 
     public void setEegHatch(int eegHatch) {
         this.eegHatch = eegHatch;
@@ -45,16 +54,7 @@ public class Queen extends Ant implements Move {
         if (eegHatch != 0){
             eegHatch--;
             if (eegHatch == 0){
-                int antHatch = RandomGenerate.randomGenerate(100, 0);
-                if (antHatch < 20){
-                    colony.getAntColony().add(new Soldier());
-                } else if (antHatch > 80){
-                    colony.getAntColony().add(new Drone());
-                } else {
-
-
-                    colony.getAntColony().add(new Worker());
-                }
+                eggHatching = true;
             }
         }
     }

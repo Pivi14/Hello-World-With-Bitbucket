@@ -20,7 +20,7 @@ public class Wasp extends Bug{
         setY(Main.getyOrigo());
         setCubeX();
         setCubeY();
-        while (isCubeX() && isCubeY()){
+        while (isCubeX() && isCubeY() && getX() == Main.getxOrigo() && getY() == Main.getyOrigo()){
             setX(RandomGenerate.randomGenerate(Main.getxSize(), 0));
             setY(RandomGenerate.randomGenerate(Main.getySize(), 0));
             setCubeX();

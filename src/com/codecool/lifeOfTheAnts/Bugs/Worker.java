@@ -64,6 +64,8 @@ public class Worker extends Ant {
             }
         } else if (carrying && !colony.getWasp().isLive()){
             moveToward(queen.getX(), queen.getY());
+            colony.getFood().setX(getX());
+            colony.getFood().setY(getY());
             if (getDistanceFromQueen() <= 2){
                 queen.setMoodCounter(queen.getMoodCounter() - 5);
                 colony.getFood().setCarrying(false);
@@ -72,7 +74,11 @@ public class Worker extends Ant {
             }
         } else if (!colony.getWasp().isLive()){
             move();
+        } else if (getLifeTime() <= 1){
+            carrying = false;
+            colony.getFood().setCarrying(false);
         }
+        setLifeTime(getLifeTime() - 1);
         setDistanceFromQueen();
     }
 }
